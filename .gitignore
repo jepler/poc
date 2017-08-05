@@ -1,0 +1,4 @@
+examples/*.stl
+*.py[oc]
+build
+dist

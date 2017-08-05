@@ -1,0 +1,47 @@
+#!/usr/bin/python
+#   -*- coding: utf-8 -*-
+#   main module of 'poc' modeling program
+#   Copyright © 2017 Jeff Epler <jepler@gmail.com>
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ns0 = dict(globals())
+
+prologue = """
+from __future__ import division
+from math import *
+from geotools import *
+from occmodel import *
+from poctools import *
+import poctools as _poctools
+_poctools.start()
+"""
+
+epilogue = """
+_poctools.output(__output__)
+"""
+
+import os
+import sys
+
+del sys.argv[0]
+filename = sys.argv[0]
+ns0['__file__'] = filename
+ns0['__output__'] = os.path.splitext(filename)[0] + ".stl"
+
+exec prologue in ns0
+#try:
+execfile(filename, ns0)
+#finally:
+exec epilogue in ns0
