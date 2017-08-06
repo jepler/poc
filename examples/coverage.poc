@@ -6,6 +6,7 @@ with Union():
     with Filleted(2), Transformed(geotools.Transform()):
             Box((-5,-5,-5), (5,5,5))
     print(Bbox())
+    print(CenterOfMass())
     print(len(list(Faces())))
     print(len(list(Vertices())))
     print(len(list(Wires())))

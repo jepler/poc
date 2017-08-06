@@ -31,7 +31,8 @@ __all__ = [
     'Chamfer', 'Fillet', 'Rotate', 'Translate', 'Transform',
     'Chamfered', 'Filleted', 'Rotated', 'Translated', 'Transformed',
     'Intersection', 'Difference', 'Union', 'Op',
-    'Object', 'Bbox', 'Edges', 'Faces', 'Vertices', 'Wires',
+    'Object', 'Bbox', 'CenterOfMass', 'CentreOfMass',
+    'Edges', 'Faces', 'Vertices', 'Wires',
     'execpoc', 'occ_to_stl', 'do_op',
 ]
 
@@ -282,6 +283,11 @@ Otherwise, `edges` must be a sequence of edges to fillet.
 
 def Object():
     return obj
+
+def CenterOfMass():
+    """Return the bounding box of the current item"""
+    return obj.centreOfMass()
+CentreOfMass = CenterOfMass
 
 def Bbox():
     """Return the bounding box of the current item"""
