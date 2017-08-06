@@ -3,6 +3,8 @@
 *poc* is a tool in the vein of *OpenSCAD* for creating 3D models in a high
 level language with a minimum of boilerplate.
 
+![pocview showing selective fillet of CSG object](/images/selective_fillet.png)
+
 ## Comparison of poc and OpenSCAD
 
 *poc* uses OpenCASCADE (via occmodel) to implement its geometric operations.
