@@ -48,7 +48,6 @@ def initial_ns():
         Xform = Transform
         from occmodel import *
         from poctools import *
-        import poctools as _poctools
         """,  ns)
     return ns
 
