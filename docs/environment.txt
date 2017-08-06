@@ -6,6 +6,7 @@ preloaded::
 
  from math import *
  from geotools import *
+ Xform = Transform
  from occmodel import *
  from poctools import *
 

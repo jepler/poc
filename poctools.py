@@ -45,6 +45,7 @@ def initial_ns():
     six.exec_("""if 1:
         from math import *
         from geotools import *
+        Xform = Transform
         from occmodel import *
         from poctools import *
         import poctools as _poctools
@@ -213,7 +214,9 @@ def Translated(delta):
     return Op(Translate, delta)
 
 def Transformed(mat):
-    """Perform a transformation"""
+    """Perform a transformation.
+
+Note that `geotools.Transform` is imported as `Xform` within poc files."""
     return Op(Transform, mat)
 
 def Filleted(radius, edges=None):
@@ -231,7 +234,9 @@ def Translate(delta):
     obj.translate(delta)
 
 def Transform(mat):
-    """Transform the active object"""
+    """Transform the active object
+
+Note that `geotools.Transform` is imported as `Xform` within poc files."""
     obj.transform(mat)
 
 def Fillet(radius, edges=None):
