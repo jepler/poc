@@ -163,8 +163,9 @@ def Sphere(center, radius):
 def Text(height, depth, text, fontpath=None):
     """Create extruded text
 
-(this appears to be broken, failing with occmodel.OCCError:
-b'failed to create edges' no matter the arguments)"""
+Note that the text may not contain whitespace!
+(this appears to be a bug in occmodel, failing with occmodel.OCCError:
+b'failed to create edges')"""
     do_op(occmodel.Solid().createText(height, depth, text, fontpath))
 
 def Torus(p1, p2, ringRadius, radius):
