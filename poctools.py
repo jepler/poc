@@ -17,9 +17,11 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import contextlib
+import __future__
 import itertools
 import occmodel
 import os
+import six
 import struct
 import sys
 
@@ -50,12 +52,19 @@ import poctools as _poctools
 """ in ns
     return ns
 
+compile_flags = (__future__.division.compiler_flag
+    | __future__.print_function.compiler_flag)
+
+def getsource(filename):
+    with open(filename, "rU") as f: return f.read()
+
 def execpoc(args, **kw):
     """Execute the named .poc file from disk
 
 Returns the resulting top level object"""
 
     filename = args[0]
+    code = compile(getsource(filename), filename, 'exec', compile_flags)
     oldargv = sys.argv[:]
     try:
         sys.argv[:] = args
@@ -63,7 +72,7 @@ Returns the resulting top level object"""
         ns['__file__'] = filename
         ns.update(kw)
         start()
-        execfile(filename, ns)
+        six.exec_(code, ns)
         return ns
     finally: sys.argv[:] = oldargv
  
