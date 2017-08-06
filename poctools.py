@@ -149,15 +149,18 @@ def Difference():
 def Op(fn, *args, **kw):
     """Convert a postfix operation into a group operation
 
-the following are roughly equivalent:
-    with Union():
-        Box(p1, p2)
-        Box(p3, p4)
-        Fillet(8)
-and
-    with Op(Fillet, 8):
-        Box(p1, p2)
-        Box(p3, p4)
+the following are roughly equivalent::
+
+ with Union():
+     Box(p1, p2)
+     Box(p3, p4)
+     Fillet(8)
+
+and::
+
+ with Op(Fillet, 8):
+     Box(p1, p2)
+     Box(p3, p4)
 """
     return withhelper(op1(_common), finalop=lambda: fn(*args, **kw))
 

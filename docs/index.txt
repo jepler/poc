@@ -11,7 +11,60 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+Program: poc
+------------
+Usage: **poc** *input.poc* *optional-args...*
 
+Execute *input.poc* and write an STL model to *input.stl*.
+
+Program: pocview
+----------------
+
+Usage: **pocview** *input.poc* *optional-args...*
+
+Execute *input.poc* and show the result onscreen.  When *input.poc* is
+modified, **pocview** updates the preview.
+
+poc environment
+---------------
+
+The poc environment is just a Python (2.x) interpreter with some extras
+preloaded::
+
+ from __future__ import division
+ from math import *
+ from geotools import *
+ from occmodel import *
+ from poctools import *
+
+poctools module
+---------------
+
+.. automodule:: poctools
+
+Primitives
+~~~~~~~~~~
+
+.. autofunction:: Box
+.. autofunction:: Cylinder
+
+Postfix operations
+~~~~~~~~~~~~~~~~~~
+
+.. autofunction:: Fillet
+
+Group operations
+~~~~~~~~~~~~~~~~
+
+.. autofunction:: Intersection
+.. autofunction:: Difference
+.. autofunction:: Union
+.. autofunction:: Op
+
+Inquiries
+~~~~~~~~~
+
+.. autofunction:: Edges
 
 Indices and tables
 ==================
