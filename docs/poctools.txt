@@ -10,6 +10,9 @@ At the outermost level, the active group operation is union().
 
 .. autofunction:: Box
 .. autofunction:: Cylinder
+.. autofunction:: Cone
+.. autofunction:: Sphere
+.. autofunction:: Torus
 
 Postfix operations
 ~~~~~~~~~~~~~~~~~~
@@ -17,6 +20,9 @@ A postfix operation modifies the currently active group operation
 in a way other than adding another primitive to it.
 
 .. autofunction:: Fillet
+.. autofunction:: Rotate
+.. autofunction:: Transform
+.. autofunction:: Translate
 
 Group operations
 ~~~~~~~~~~~~~~~~
@@ -28,6 +34,9 @@ its whole contents are treated as a primitive in the outer operation.
 .. autofunction:: Difference
 .. autofunction:: Union
 .. autofunction:: Op
+.. autofunction:: Rotated
+.. autofunction:: Transformed
+.. autofunction:: Translated
 
 Inquiries
 ~~~~~~~~~

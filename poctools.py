@@ -26,9 +26,9 @@ import struct
 import sys
 
 __all__ = [
-    'Box', 'Cylinder',
-    'Fillet', 'Rotate',
-    'Filleted', 'Rotated',
+    'Box', 'Cylinder', 'Cone', 'Sphere', 'Text', 'Torus',
+    'Fillet', 'Rotate', 'Translate', 'Transform',
+    'Filleted', 'Rotated', 'Translated', 'Transformed',
     'Intersection', 'Difference', 'Union', 'Op',
     'Object', 'Bbox', 'Edges', 'Faces', 'Vertices', 'Wires',
     'execpoc', 'occ_to_stl', 'do_op',
@@ -62,10 +62,10 @@ def execpoc(args, **kw):
 
 Returns the resulting top level object"""
 
-    filename = args[0]
-    code = compile(getsource(filename), filename, 'exec', compile_flags)
     oldargv = sys.argv[:]
     try:
+        filename = args[0]
+        code = compile(getsource(filename), filename, 'exec', compile_flags)
         sys.argv[:] = args
         ns = initial_ns()
         ns['__file__'] = filename
@@ -152,6 +152,25 @@ def Cylinder(p1, p2, radius):
     """Create a cylinder primitive"""
     do_op(occmodel.Solid().createCylinder(p1, p2, radius))
 
+def Cone(p1, p2, radius1, radius2):
+    """Create a cone primitive"""
+    do_op(occmodel.Solid().createCone(p1, p2, radius1, radius2))
+
+def Sphere(center, radius):
+    """Create a sphere primitive"""
+    do_op(occmodel.Solid().createSphere(center, radius))
+
+def Text(height, depth, text, fontpath=None):
+    """Create extruded text
+
+(this appears to be broken, failing with occmodel.OCCError:
+b'failed to create edges' no matter the arguments)"""
+    do_op(occmodel.Solid().createText(height, depth, text, fontpath))
+
+def Torus(p1, p2, ringRadius, radius):
+    """Create a torus"""
+    do_op(occmodel.Solid().createTorus(p1, p2, ringRadius, radius))
+
 ### Group operations
 
 def Intersection():
@@ -188,6 +207,14 @@ def Rotated(angle, axis, center=(0,0,0)):
     """Perform a rotate operation"""
     return Op(Rotate, angle, axis, center)
 
+def Translated(delta):
+    """Perform a translate operation"""
+    return Op(Translate, delta)
+
+def Transformed(mat):
+    """Perform a transformation"""
+    return Op(Transform, delta)
+
 def Filleted(radius, edges=None):
     """Perform a fillet operation"""
     return Op(Fillet, radius, edges)
@@ -197,6 +224,14 @@ def Filleted(radius, edges=None):
 def Rotate(angle, axis, center=(0,0,0)):
     """Rotate the active object"""
     obj.rotate(angle, axis, center)
+
+def Translate(delta):
+    """Translate the active object"""
+    obj.translate(delta)
+
+def Transform(mat):
+    """Transform the active object"""
+    obj.transform(mat)
 
 def Fillet(radius, edges=None):
     """Fillte the active object
