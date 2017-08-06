@@ -33,6 +33,11 @@ used in *OpenSCAD*.
 group operations, and inquires are generally shorthand ways for invoking
 methods on occmodel *Solid* objects.
 
+## Compatibility
+
+The the design of the *poc* standard library is very much in flux, and
+there are likely to be compatibility-breaking changes as it develops.
+
 ## Primitives
 
 Primitives include `Box()` and `Cylinder()`.  For example, to create a
@@ -66,7 +71,7 @@ Cylinder((0,0,0), (0,0,100), 35))
 Fillet(8)
 ~~~~
 
-## Group operations
+## Postfix operations as Group operations
 
 Some postfix operations are available as group operations (e.g.,
 postfix `Fillet` is group operation `Filleted`); other postfix
