@@ -1,4 +1,5 @@
 examples/*.stl
+.coverage
 *.py[oc]
 build
 dist

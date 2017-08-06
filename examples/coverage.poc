@@ -1,0 +1,13 @@
+# This example isn't useful, except that it increases code coverage
+import geotools
+with Union():
+    with Rotated(1, (0,0,1)):
+        Sphere((0,0,0), 6)
+    with Filleted(2), Transformed(geotools.Transform()):
+            Box((-5,-5,-5), (5,5,5))
+    print(Bbox())
+    print(len(list(Faces())))
+    print(len(list(Vertices())))
+    print(len(list(Wires())))
+
+Text(8, .25, 'Hello_world')
