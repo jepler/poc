@@ -254,16 +254,21 @@ def Object():
     return obj
 
 def Bbox():
+    """Return the bounding box of the current item"""
     return obj.boundingBox()
 
 def Edges():
+    """Return the edge iterator of the current item"""
     return occmodel.EdgeIterator(Object())
 
 def Faces():
+    """Return the face iterator of the current item"""
     return occmodel.FaceIterator(Object())
 
 def Vertices():
+    """Return the vertex iterator of the current item"""
     return occmodel.VertexIterator(Object())
 
 def Wires():
+    """Return the wire iterator of the current item"""
     return occmodel.WireIterator(Object())
