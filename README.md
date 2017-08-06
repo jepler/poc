@@ -22,10 +22,10 @@ used in *OpenSCAD*.
 
 # Dependencies
 
-* OpenCASCADE Community Edition (OCE)
-* occmodel
-* geotools
-* gltools
+* [OpenCASCADE Community Edition (OCE)](https://github.com/tpaviot/oce/pulls)
+* [occmodel](https://github.com/tenko/occmodel)
+* [geotools](https://github.com/tenko/geotools)
+* [gltools](https://github.com/tenko/gltools)
 
 # poc syntax
 
