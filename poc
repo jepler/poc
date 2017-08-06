@@ -16,32 +16,14 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-ns0 = dict(globals())
-
-prologue = """
-from __future__ import division
-from math import *
-from geotools import *
-from occmodel import *
-from poctools import *
-import poctools as _poctools
-_poctools.start()
-"""
-
-epilogue = """
-_poctools.output(__output__)
-"""
-
 import os
 import sys
+import poctools
 
-del sys.argv[0]
-filename = sys.argv[0]
-ns0['__file__'] = filename
-ns0['__output__'] = os.path.splitext(filename)[0] + ".stl"
+filename = sys.argv[1]
 
-exec prologue in ns0
-#try:
-execfile(filename, ns0)
-#finally:
-exec epilogue in ns0
+print >>sys.stderr, filename
+ns = poctools.execpoc(sys.argv[1:],
+    __output__= os.path.splitext(filename)[0] + ".stl")
+if poctools.obj is not None:
+    poctools.output(ns['__output__'])

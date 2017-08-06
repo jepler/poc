@@ -21,6 +21,7 @@ import itertools
 import occmodel
 import os
 import struct
+import sys
 
 __all__ = [
     'Box', 'Cylinder',
@@ -30,7 +31,36 @@ __all__ = [
 ]
 
 ### Supporting routines
+def initial_ns():
+    ns = {
+        '__builtins__': __builtins__,
+        '__name__': '__main__',
+        '__doc__': None,
+        '__package__': None
+    }
+    exec """
+from __future__ import division
+from math import *
+from geotools import *
+from occmodel import * 
+from poctools import *
+import poctools as _poctools
+""" in ns
+    return ns
 
+def execpoc(args, **kw):
+    filename = args[0]
+    oldargv = sys.argv[:]
+    try:
+        sys.argv[:] = args
+        ns = initial_ns()
+        ns['__file__'] = filename
+        ns.update(kw)
+        start()
+        execfile(filename, ns)
+        return ns
+    finally: sys.argv[:] = oldargv
+ 
 def do_op(b):
     if b is None: raise ValueError
     n = next(op)
