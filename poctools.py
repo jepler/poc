@@ -179,7 +179,16 @@ def Rotate(angle, axis, center=(0,0,0)):
     obj.rotate(angle, axis, center)
 
 def Fillet(radius, edges=None):
-    """Fillte the active object"""
+    """Fillte the active object
+
+If `edges` is None, then all edges are filletted.
+
+If `edges` is callable, it is treated as a predicate which returns
+True for each edge that should be filleted.
+
+Otherwise, `edges` must be a sequence of edges to fillet.
+"""
+    if callable(edges): edges = [e for e in Edges() if edges(e)]
     obj.fillet(radius, edges)
 
 ### Inquiries
