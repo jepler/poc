@@ -1,0 +1,5 @@
+e1 = Edge().createCircle(center=(.25,0.,0.),normal=(-.25,0.,1.),radius = .25)
+e2 = Edge().createCircle(center=(.25,0.,.5),normal=(0.,.25,1.),radius = .5)
+v1 = Vertex(.25,0.,1.)
+
+Loft((e1, e2, v1))

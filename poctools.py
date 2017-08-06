@@ -27,6 +27,7 @@ import sys
 
 __all__ = [
     'Box', 'Cylinder', 'Cone', 'Sphere', 'Text', 'Torus',
+    'Extrude', 'Revolve', 'Loft',
     'Fillet', 'Rotate', 'Translate', 'Transform',
     'Filleted', 'Rotated', 'Translated', 'Transformed',
     'Intersection', 'Difference', 'Union', 'Op',
@@ -168,6 +169,18 @@ b'failed to create edges')"""
 def Torus(p1, p2, ringRadius, radius):
     """Create a torus"""
     do_op(occmodel.Solid().createTorus(p1, p2, ringRadius, radius))
+
+def Extrude(obj, p1, p2):
+    """Create a solid by extruding edge, wire, or face from p1 to p2"""
+    do_op(occmodel.Solid().extrude(obj, p1, p2))
+
+def Revolve(face, p1, p2, angle):
+    """Create a solid by revolving the face around the given axis"""
+    do_op(occmodel.Solid().revolve(face, p1, p2, angle))
+
+def Loft(profiles, ruled=True, tolerance=1e-6):
+    """Create a solid by lofting through a sequence of wires or closed edges"""
+    do_op(occmodel.Solid().loft(profiles, ruled, tolerance))
 
 ### Group operations
 

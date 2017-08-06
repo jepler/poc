@@ -1,0 +1,6 @@
+e1 = Edge().createLine((-.5,0.,0.),(.5,0.,0.))
+e2 = Edge().createArc3P((.5,0.,0.),(-.5,0.,0.),(0.,.5,0.))
+w1 = Wire().createWire((e1,e2))
+f1 = Face().createFace(w1)
+Extrude(f1, (0.,0.,0.), (0.,0.,1.))
+Fillet(.05)

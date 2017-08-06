@@ -14,6 +14,9 @@ At the outermost level, the active group operation is union().
 .. autofunction:: Sphere
 .. autofunction:: Text
 .. autofunction:: Torus
+.. autofunction:: Extrude
+.. autofunction:: Loft
+.. autofunction:: Revolve
 
 Postfix operations
 ~~~~~~~~~~~~~~~~~~
