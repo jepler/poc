@@ -74,7 +74,8 @@ class PocViewer(Viewer):
             time.sleep(1/120.)
             gltools.PollEvents()
             newmodtime = getmtime(self.filename)
-            if newmodtime != self.modtime:
+            now = time.time()
+            if newmodtime + .1 > now and newmodtime != self.modtime:
                 self.reloadModel(newmodtime)
                 self.updateBounds()
                 self.redraw()
