@@ -52,6 +52,7 @@ class PocViewer(Viewer):
             poctools.execpoc(sys.argv[1:])
         except:
             traceback.print_exc()
+            return
 
         self.clear()
         o = poctools.obj
