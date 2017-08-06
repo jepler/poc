@@ -27,7 +27,7 @@ import sys
 
 __all__ = [
     'Box', 'Cylinder', 'Cone', 'Sphere', 'Text', 'Torus',
-    'Extrude', 'Revolve', 'Loft',
+    'Extrude', 'Revolve', 'Loft', 'Pipe',
     'Chamfer', 'Fillet', 'Rotate', 'Translate', 'Transform',
     'Chamfered', 'Filleted', 'Rotated', 'Translated', 'Transformed',
     'Intersection', 'Difference', 'Union', 'Op',
@@ -182,6 +182,9 @@ def Revolve(face, p1, p2, angle):
 def Loft(profiles, ruled=True, tolerance=1e-6):
     """Create a solid by lofting through a sequence of wires or closed edges"""
     do_op(occmodel.Solid().loft(profiles, ruled, tolerance))
+
+def Pipe(face, path):
+    do_op(occmodel.Solid().pipe(face, path))
 
 ### Group operations
 
