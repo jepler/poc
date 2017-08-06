@@ -44,17 +44,24 @@ poctools module
 
 Primitives
 ~~~~~~~~~~
+Each primitive is added to the currently active group operation.
+At the outermost level, the active group operation is union().
 
 .. autofunction:: Box
 .. autofunction:: Cylinder
 
 Postfix operations
 ~~~~~~~~~~~~~~~~~~
+A postfix operation modifies the currently active group operation
+in a way other than adding another primitive to it.
 
 .. autofunction:: Fillet
 
 Group operations
 ~~~~~~~~~~~~~~~~
+A group operation is introduced by the `with` statement, such as
+`with Intersection():`.  At the conclusion of the `with` statement,
+its whole contents are treated as a primitive in the outer operation.
 
 .. autofunction:: Intersection
 .. autofunction:: Difference
@@ -63,6 +70,9 @@ Group operations
 
 Inquiries
 ~~~~~~~~~
+An inquiry returns information about the currently active group operation.
+These inquiries can be used to make decisions, or may also be useful
+to pass to postfix operations (e.g., to `Fillet`'s `edges=` parameter)
 
 .. autofunction:: Edges
 
