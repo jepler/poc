@@ -3,13 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Python OCE Composer (poc)'s documentation!
-=====================================================
+Python OCE Composer (poc)
+=========================
 
-Contents:
+..
+    Contents:
 
-.. toctree::
-   :maxdepth: 2
+    .. toctree::
+       :maxdepth: 2
 
 Program: poc
 ------------
@@ -74,7 +75,20 @@ An inquiry returns information about the currently active group operation.
 These inquiries can be used to make decisions, or may also be useful
 to pass to postfix operations (e.g., to `Fillet`'s `edges=` parameter)
 
+.. autofunction:: Bbox
 .. autofunction:: Edges
+.. autofunction:: Faces
+.. autofunction:: Vertices
+.. autofunction:: Wires
+
+Other routines
+~~~~~~~~~~~~~~
+These routines are not normally used in `poc` programs, but may be useful
+for wrapper programs or for implementing new operations.
+
+.. autofunction:: execpoc
+.. autofunction:: occ_to_stl
+.. autofunction:: do_op
 
 Indices and tables
 ==================

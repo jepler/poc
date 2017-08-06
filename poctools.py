@@ -28,7 +28,8 @@ __all__ = [
     'Fillet', 'Rotate',
     'Filleted', 'Rotated',
     'Intersection', 'Difference', 'Union', 'Op',
-    'Object', 'Bbox', 'Edges', 'Faces', 'Vertices', 'Wires'
+    'Object', 'Bbox', 'Edges', 'Faces', 'Vertices', 'Wires',
+    'execpoc', 'occ_to_stl', 'do_op',
 ]
 
 ### Supporting routines
@@ -50,6 +51,10 @@ import poctools as _poctools
     return ns
 
 def execpoc(args, **kw):
+    """Execute the named .poc file from disk
+
+Returns the resulting top level object"""
+
     filename = args[0]
     oldargv = sys.argv[:]
     try:
@@ -63,6 +68,7 @@ def execpoc(args, **kw):
     finally: sys.argv[:] = oldargv
  
 def do_op(b):
+    """Adds the object 'b' to the current operation"""
     if b is None: raise ValueError
     n = next(op)
     n(obj, b)
@@ -104,6 +110,12 @@ def mesh_to_stl(m, dest):
         dest.write('\0\0')
 
 def occ_to_stl(o, dest, prec=.001):
+    """Convert a mesh or solid to stl
+
+Writes to the open file object 'dest'
+
+If a solid is passed it, it is converted to a mesh with the given
+precision, defaulting to .001."""
     if isinstance(o, occmodel.Mesh): mesh_to_stl(o, dest)
     mesh_to_stl(o.createMesh(prec), dest)
 
