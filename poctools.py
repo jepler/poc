@@ -42,14 +42,13 @@ def initial_ns():
         '__doc__': None,
         '__package__': None
     }
-    exec """
-from __future__ import division
-from math import *
-from geotools import *
-from occmodel import * 
-from poctools import *
-import poctools as _poctools
-""" in ns
+    six.exec_("""if 1:
+        from math import *
+        from geotools import *
+        from occmodel import *
+        from poctools import *
+        import poctools as _poctools
+        """,  ns)
     return ns
 
 compile_flags = (__future__.division.compiler_flag
