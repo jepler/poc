@@ -117,9 +117,9 @@ def withhelper(newop, newobj=None, finalop=None):
     try:
         yield
     finally:
+        if finalop: finalop()
         obj = holdobj
         op = holdop
-        if finalop: finalop(newobj)
         do_op(newobj)
 
 ### Primitives
