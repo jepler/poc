@@ -30,6 +30,18 @@ A group operation is introduced by the `with` statement, such as
 `with Intersection():`.  At the conclusion of the `with` statement,
 its whole contents are treated as a primitive in the outer operation.
 
+Remember that you can introduce more than one nested group operation
+with a single `with` statement (and thus a single indentation level)::
+
+    with Fillet(8), Difference():
+       suite 
+
+is equivalent to::
+
+    with Fillet(8):
+        with Difference():
+            suite
+
 .. autofunction:: Intersection
 .. autofunction:: Difference
 .. autofunction:: Union
