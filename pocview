@@ -1,0 +1,77 @@
+#!/usr/bin/python
+#   -*- coding: utf-8 -*-
+#   auto-updating viewer of 'poc' modeling program
+#   Copyright © 2017 Jeff Epler <jepler@gmail.com>
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+from occmodelviewer import Viewer
+import gltools
+import os
+import poctools
+import sys
+import time
+import traceback
+
+filename = sys.argv[1]
+
+def getmtime(filename):
+    try:
+        return os.stat(filename).st_mtime
+    except os.error:
+        return -1
+
+class PocViewer(Viewer):
+    def __init__(self, filename):
+        title = "poc viewer - 'r' to reload, 'q' to quit"
+        Viewer.__init__(self, 640, 480, title, fullscreen=False)
+
+        self.defaultColor = gltools.ColorRGBA(100,100,100,255)
+        self.edgeColor = gltools.ColorRGBA(255,255,255,255)
+        self.filename = filename
+        self.reloadModel()
+
+    def onChar(self, ch):
+        if ch == 'r': self.reloadModel()
+        if ch == 'q': self.running = False
+
+    def reloadModel(self, modtime=None):
+        self.modtime = modtime or getmtime(self.filename)
+        try:
+            poctools.execpoc(sys.argv[1:])
+        except:
+            traceback.print_exc()
+
+        self.clear()
+        o = poctools.obj
+        bb = o.boundingBox()
+        if bb.min != bb.max:
+            self.add(o)
+
+    # Viewer.mainLoop seems to have no provision for code to run when
+    # idle, so we are forced to do this..
+    def mainLoop(self):
+        while self.running:
+            time.sleep(1/120.)
+            gltools.PollEvents()
+            newmodtime = getmtime(self.filename)
+            if newmodtime != self.modtime:
+                self.reloadModel(newmodtime)
+                self.updateBounds()
+                self.redraw()
+
+mw = PocViewer(filename)
+mw.running = True
+mw.onIsoView()
+mw.mainLoop()

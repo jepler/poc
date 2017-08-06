@@ -11,13 +11,10 @@ which uses CGAL.  For instance, OpenCASCADE has `fillet` as a first-class
 operation, while it lacks `minkowski` and `hull` which are quite frequently
 used in *OpenSCAD*.
 
-*poc* does not presently support a live interactive preview like *OpenSCAD*,
-and its design means that quick display of the result of CSG operations via
-`libopencsg` will not be possible.
-
 # Setup
 * Install dependencies
 * Run setup, e.g., `sudo python setup.py install`
+* Invoke `pocview somefile.poc` to lanuch a viewer.  It autoupdates if you modify the input file.  Note that some versions of `gltools` create fullscreen windows unconditionally (and iconify them when they lose focus), which is inconvenient for this use.
 * Invoke `poc somefile.poc` to create `somefile.stl`
 * or use `#!/usr/bin/env poc` so that `./somefile.poc` is executable
 
@@ -26,7 +23,7 @@ and its design means that quick display of the result of CSG operations via
 * OpenCASCADE Community Edition (OCE)
 * occmodel
 * geotools
-
+* gltools
 # poc syntax
 
 *poc* programs are Python (2.x) programs.  Primitives, postfix operations,

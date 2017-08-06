@@ -10,5 +10,5 @@ setup(name='poc',
       author_email='jepler@gmail.com',
       url='https://github.com/jepler/poc',
       py_modules=['poctools'],
-      scripts=['poc'],
+      scripts=['poc', 'pocview'],
      )
