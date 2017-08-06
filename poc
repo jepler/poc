@@ -20,6 +20,9 @@ import os
 import sys
 import poctools
 
+if len(sys.argv) < 2:
+    raise SystemExit("Usage: %s filename [args....]" % sys.argv[0])
+
 filename = sys.argv[1]
 
 ns = poctools.execpoc(sys.argv[1:],
