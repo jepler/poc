@@ -201,7 +201,7 @@ and::
      Box(p1, p2)
      Box(p3, p4)
 """
-    return withhelper(op1(_common), finalop=lambda: fn(*args, **kw))
+    return withhelper(op1(_fuse), finalop=lambda: fn(*args, **kw))
 
 def Rotated(angle, axis, center=(0,0,0)):
     """Perform a rotate operation"""
