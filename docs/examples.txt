@@ -1,0 +1,12 @@
+Examples
+========
+
+Selective fillet
+----------------
+
+.. include:: ../examples/selective_fillet.poc
+    :code: python
+
+.. image:: ../images/selective_fillet.png
+
+For more, see the 'examples' directory in the source distribution.

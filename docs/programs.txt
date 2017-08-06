@@ -1,0 +1,18 @@
+Programs
+========
+
+Program: poc
+------------
+Usage: **poc** *input.poc* *optional-args...*
+
+Execute *input.poc* and write an STL model to *input.stl*.
+
+Program: pocview
+----------------
+
+Usage: **pocview** *input.poc* *optional-args...*
+
+Execute *input.poc* and show the result onscreen.  When *input.poc* is
+modified, **pocview** updates the preview.
+
+
