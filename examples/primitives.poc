@@ -1,0 +1,20 @@
+#!/usr/bin/env poc
+import geotools
+
+with Translated((0,0,0)):
+    Sphere((0,0,0), 12)
+
+with Translated((-20,0,0)):
+    Box((-5,-5,-5), (5,5,5))
+
+with Translated((20,0,0)):
+    Cylinder((0,0,-5), (0,0,5), 5)
+
+with Translated((0,20,0)):
+    Cone((0,0,-5), (0,0,5), 5, 2)
+
+with Translated((0,-20,0)):
+    Torus((0,0,0), (0,0,1), 5, 2)
+
+with Translated((-10,-10,-20)):
+    Text(8, 2, "hello_poc")
