@@ -1,5 +1,7 @@
 # poc: Python OCE Composer
 
+[![Documentation Status](https://readthedocs.org/projects/python-poc/badge/?version=latest)](http://python-poc.readthedocs.io/en/latest/?badge=latest)
+
 *poc* is a tool in the vein of *OpenSCAD* for creating 3D models in a high
 level language with a minimum of boilerplate.
 
@@ -27,10 +29,6 @@ used in *OpenSCAD*.
 * [occmodel](https://github.com/tenko/occmodel)
 * [geotools](https://github.com/tenko/geotools)
 * [gltools](https://github.com/tenko/gltools)
-
-# Documentation
-
-[![Documentation Status](https://readthedocs.org/projects/python-poc/badge/?version=latest)](http://python-poc.readthedocs.io/en/latest/?badge=latest)
 
 # Stability
 
