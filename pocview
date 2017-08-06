@@ -18,6 +18,7 @@
 
 from occmodelviewer import Viewer
 import gltools
+import geotools
 import os
 import poctools
 import sys
@@ -56,6 +57,11 @@ class PocViewer(Viewer):
 
         self.clear()
         o = poctools.obj
+        # this makes spheres preview nicely, while o.scale() doesn't.  dunno
+        # why!  (but it's related to the coarseness of the mesh conversion
+        # internal to Viewer.add)
+        t = geotools.Transform().identity().scale((100,100,100))
+        o = o.transform(t)
         bb = o.boundingBox()
         if bb.min != bb.max:
             self.add(o)
