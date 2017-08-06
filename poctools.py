@@ -51,9 +51,6 @@ def initial_ns():
         """,  ns)
     return ns
 
-compile_flags = (__future__.division.compiler_flag
-    | __future__.print_function.compiler_flag)
-
 def getsource(filename):
     with open(filename, "rU") as f: return f.read()
 
@@ -65,7 +62,7 @@ Returns the resulting top level object"""
     oldargv = sys.argv[:]
     try:
         filename = args[0]
-        code = compile(getsource(filename), filename, 'exec', compile_flags)
+        code = compile(getsource(filename), filename, 'exec')
         sys.argv[:] = args
         ns = initial_ns()
         ns['__file__'] = filename
