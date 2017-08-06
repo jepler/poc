@@ -23,6 +23,7 @@ Postfix operations
 A postfix operation modifies the currently active group operation
 in a way other than adding another primitive to it.
 
+.. autofunction:: Chamfer
 .. autofunction:: Fillet
 .. autofunction:: Rotate
 .. autofunction:: Transform
@@ -53,6 +54,8 @@ is equivalent to::
 .. autofunction:: Rotated
 .. autofunction:: Transformed
 .. autofunction:: Translated
+.. autofunction:: Chamfered
+.. autofunction:: Filleted
 
 Inquiries
 ~~~~~~~~~

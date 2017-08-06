@@ -28,8 +28,8 @@ import sys
 __all__ = [
     'Box', 'Cylinder', 'Cone', 'Sphere', 'Text', 'Torus',
     'Extrude', 'Revolve', 'Loft',
-    'Fillet', 'Rotate', 'Translate', 'Transform',
-    'Filleted', 'Rotated', 'Translated', 'Transformed',
+    'Chamfer', 'Fillet', 'Rotate', 'Translate', 'Transform',
+    'Chamfered', 'Filleted', 'Rotated', 'Translated', 'Transformed',
     'Intersection', 'Difference', 'Union', 'Op',
     'Object', 'Bbox', 'Edges', 'Faces', 'Vertices', 'Wires',
     'execpoc', 'occ_to_stl', 'do_op',
@@ -232,6 +232,10 @@ def Filleted(radius, edges=None):
     """Perform a fillet operation"""
     return Op(Fillet, radius, edges)
 
+def Chamfered(distance, edges=None):
+    """Perform a fillet operation"""
+    return Op(Chamfer, distance, edges)
+
 ### Postfix operations
 
 def Rotate(angle, axis, center=(0,0,0)):
@@ -260,6 +264,19 @@ Otherwise, `edges` must be a sequence of edges to fillet.
 """
     if callable(edges): edges = [e for e in Edges() if edges(e)]
     obj.fillet(radius, edges)
+
+def Chamfer(distance, edges=None):
+    """Chamfer the active object
+
+If `edges` is None, then all edges are filletted.
+
+If `edges` is callable, it is treated as a predicate which returns
+True for each edge that should be filleted.
+
+Otherwise, `edges` must be a sequence of edges to fillet.
+"""
+    if callable(edges): edges = [e for e in Edges() if edges(e)]
+    obj.chamfer(distance, edges)
 
 ### Inquiries
 
