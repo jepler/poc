@@ -6,6 +6,15 @@
 Python OCE Composer (poc)
 =========================
 
+*poc* is a tool in the vein of *OpenSCAD* for creating 3D models in a high
+level language with a minimum of boilerplate.
+
+*poc* uses OpenCASCADE (via occmodel) to implement its geometric operations.
+This means it has different strengths and weaknesses compared to *OpenSCAD*,
+which uses CGAL.  For instance, OpenCASCADE has `fillet` as a first-class
+operation, while it lacks `minkowski` and `hull` which are quite frequently
+used in *OpenSCAD*.
+
 Contents:
 
 .. toctree::
