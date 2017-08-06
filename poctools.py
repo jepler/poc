@@ -249,7 +249,7 @@ Note that `geotools.Transform` is imported as `Xform` within poc files."""
     obj.transform(mat)
 
 def Fillet(radius, edges=None):
-    """Fillte the active object
+    """Fillet the active object
 
 If `edges` is None, then all edges are filletted.
 
