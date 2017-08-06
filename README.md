@@ -15,7 +15,7 @@ used in *OpenSCAD*.
 
 # Setup
 * Install dependencies
-* Run setup, e.g., `sudo python setup.py install`
+* Run setup, e.g., `sudo python3 setup.py install`
 * Invoke `pocview somefile.poc` to lanuch a viewer.  It autoupdates if you modify the input file.  Note that some versions of `gltools` create fullscreen windows unconditionally (and iconify them when they lose focus), which is inconvenient for this use.
 * Invoke `poc somefile.poc` to create `somefile.stl`
 * or use `#!/usr/bin/env poc` so that `./somefile.poc` is executable
@@ -29,7 +29,7 @@ used in *OpenSCAD*.
 
 # poc syntax
 
-*poc* programs are Python (2.x) programs.  Primitives, postfix operations,
+*poc* programs are Python3 programs.  Primitives, postfix operations,
 group operations, and inquires are generally shorthand ways for invoking
 methods on occmodel *Solid* objects.
 

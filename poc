@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #   -*- coding: utf-8 -*-
 #   main module of 'poc' modeling program
 #   Copyright © 2017 Jeff Epler <jepler@gmail.com>
@@ -22,7 +22,6 @@ import poctools
 
 filename = sys.argv[1]
 
-print >>sys.stderr, filename
 ns = poctools.execpoc(sys.argv[1:],
     __output__= os.path.splitext(filename)[0] + ".stl")
 if poctools.obj is not None:

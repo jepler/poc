@@ -106,7 +106,7 @@ def output(fn):
     os.rename(fn + ".tmp", fn)
 
 def mesh_to_stl(m, dest):
-    dest.write("\0" * 80)
+    dest.write(b"\0" * 80)
     dest.write(struct.pack("<i", m.ntriangles()))
 
     n0 = struct.pack("<fff", 0., 0., 0.)
@@ -115,7 +115,7 @@ def mesh_to_stl(m, dest):
         dest.write(struct.pack("<fff", *m.vertex(m.triangles[i])))
         dest.write(struct.pack("<fff", *m.vertex(m.triangles[i+1])))
         dest.write(struct.pack("<fff", *m.vertex(m.triangles[i+2])))
-        dest.write('\0\0')
+        dest.write(b'\0\0')
 
 def occ_to_stl(o, dest, prec=.001):
     """Convert a mesh or solid to stl
