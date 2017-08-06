@@ -12,6 +12,7 @@ At the outermost level, the active group operation is union().
 .. autofunction:: Cylinder
 .. autofunction:: Cone
 .. autofunction:: Sphere
+.. autofunction:: Text
 .. autofunction:: Torus
 
 Postfix operations
