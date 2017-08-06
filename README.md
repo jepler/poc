@@ -27,8 +27,8 @@ used in *OpenSCAD*.
 # poc syntax
 
 *poc* programs are Python (2.x) programs.  Primitives, postfix operations,
-and group operations are generally shorthand ways for invoking methods on
-occmodel *Solid* objects.
+group operations, and inquires are generally shorthand ways for invoking
+methods on occmodel *Solid* objects.
 
 ## Primitives
 
@@ -63,7 +63,19 @@ Cylinder((0,0,0), (0,0,100), 35))
 Fillet(8)
 ~~~~
 
+## Group operations
+
 Some postfix operations are available as group operations (e.g.,
 postfix `Fillet` is group operation `Filleted`); other postfix
 operations can be converted to group operations with group operation
 `Op()`.
+
+## Inquiries
+
+Information about the current object can be retrieved by *inquiries* like
+`Edges()`.  For example, to selectively fillet some edges of a cube,
+
+~~~~
+Cube((-50,-50,-50), (50,50,50))
+Fillet(8, [e for e in Edges() if e.boundingBox().max.z > 0])
+~~~~

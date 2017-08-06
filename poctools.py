@@ -27,7 +27,8 @@ __all__ = [
     'Box', 'Cylinder',
     'Fillet', 'Rotate',
     'Filleted', 'Rotated',
-    'Intersection', 'Difference', 'Union', 'Op'
+    'Intersection', 'Difference', 'Union', 'Op',
+    'Object', 'Bbox', 'Edges', 'Faces', 'Vertices', 'Wires'
 ]
 
 ### Supporting routines
@@ -177,3 +178,23 @@ def Rotate(angle, axis, center=(0,0,0)):
 def Fillet(radius, edges=None):
     """Fillte the active object"""
     obj.fillet(radius, edges)
+
+### Inquiries
+
+def Object():
+    return obj
+
+def Bbox():
+    return obj.boundingBox()
+
+def Edges():
+    return occmodel.EdgeIterator(Object())
+
+def Faces():
+    return occmodel.FaceIterator(Object())
+
+def Vertices():
+    return occmodel.VertexIterator(Object())
+
+def Wires():
+    return occmodel.WireIterator(Object())
