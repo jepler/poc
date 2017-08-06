@@ -213,7 +213,7 @@ def Translated(delta):
 
 def Transformed(mat):
     """Perform a transformation"""
-    return Op(Transform, delta)
+    return Op(Transform, mat)
 
 def Filleted(radius, edges=None):
     """Perform a fillet operation"""
