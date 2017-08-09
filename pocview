@@ -57,12 +57,6 @@ class PocViewer(Viewer):
 
         self.clear()
         o = poctools.obj
-        # this makes spheres preview nicely, while o.scale() doesn't.  dunno
-        # why!  (but it's related to the coarseness of the mesh conversion
-        # internal to Viewer.add)
-        fudge = 1 + 1e-7
-        t = geotools.Transform().scale(1+1e-7)
-        o = o.transform(t)
         bb = o.boundingBox()
         if bb.min != bb.max:
             self.add(o)
