@@ -19,6 +19,8 @@
 import contextlib
 import __future__
 import itertools
+import geotools
+import math
 import occmodel
 import os
 import six
@@ -157,7 +159,19 @@ def Cone(p1, p2, radius1, radius2):
 
 def Sphere(center, radius):
     """Create a sphere primitive"""
-    do_op(occmodel.Solid().createSphere(center, radius))
+    e1 = occmodel.Edge().createArc((1,0,0), (0,1,0), (0,0,0))
+    e2 = occmodel.Edge().createLine((0,1,0), (0,0,0))
+    e3 = occmodel.Edge().createLine((0,0,0), (1,0,0))
+    w1 = occmodel.Wire().createWire((e1, e2, e3))
+    f1 = occmodel.Face().createFace(w1)
+
+    o = occmodel.Solid()
+    o.revolve(f1, (0,0,0), (1,0,0), 2*math.pi)
+    p = o.copy().mirror(geotools.Plane.fromNormal((0,0,0), (1,0,0)))
+    o.fuse(p)
+    o.scale((0,0,0), radius)
+    o.translate(center)
+    do_op(o)
 
 def Text(height, depth, text, fontpath=None):
     """Create extruded text
