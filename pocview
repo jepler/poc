@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python2
 #   -*- coding: utf-8 -*-
 #   auto-updating viewer of 'poc' modeling program
 #   Copyright © 2017 Jeff Epler <jepler@gmail.com>
@@ -17,13 +17,12 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from occmodelviewer import Viewer
-import gltools
-import geotools
 import os
 import poctools
 import sys
 import time
 import traceback
+import vtk
 
 filename = sys.argv[1]
 
@@ -35,46 +34,48 @@ def getmtime(filename):
 
 class PocViewer(Viewer):
     def __init__(self, filename):
-        title = "poc viewer - 'r' to reload, 'q' to quit"
-        Viewer.__init__(self, 640, 480, title, fullscreen=False)
-
-        self.defaultColor = gltools.ColorRGBA(100,100,100,255)
-        self.edgeColor = gltools.ColorRGBA(255,255,255,255)
         self.filename = filename
-        self.reloadModel()
+        self.modtime = -2
+        self.actor = vtk.vtkActor()
+        self.ren = vtk.vtkRenderer()
+        self.renWin = vtk.vtkRenderWindow()
+        self.renWin.AddRenderer(self.ren)
 
-    def onChar(self, ch):
-        if ch == 'r': self.reloadModel()
-        if ch == 'q': self.running = False
+        self.iren = vtk.vtkRenderWindowInteractor()
+        self.iren.SetRenderWindow(self.renWin)
+
+        self.ren.AddActor(self.actor)
+        self.iren.Initialize()
+        self.iren.CreateRepeatingTimer(100)
+        self.iren.AddObserver('TimerEvent', self.idle)
+
+    def Start(self):
+        self.reloadModel()
+        self.iren.Start()
 
     def reloadModel(self, modtime=None):
         self.modtime = modtime or getmtime(self.filename)
         try:
-            poctools.execpoc(sys.argv[1:])
+            ns = poctools.execpoc(sys.argv[1:],
+                __output__= os.path.splitext(filename)[0] + ".stl")
+            poctools.output(ns['__output__'])
         except:
             traceback.print_exc()
             return
 
-        self.clear()
-        o = poctools.obj
-        bb = o.boundingBox()
-        if bb.min != bb.max:
-            self.add(o)
+        reader = vtk.vtkSTLReader()
+        reader.SetFileName(ns['__output__'])
 
-    # Viewer.mainLoop seems to have no provision for code to run when
-    # idle, so we are forced to do this..
-    def mainLoop(self):
-        while self.running:
-            time.sleep(1/120.)
-            gltools.PollEvents()
-            newmodtime = getmtime(self.filename)
-            now = time.time()
-            if newmodtime + .1 > now and newmodtime != self.modtime:
-                self.reloadModel(newmodtime)
-                self.updateBounds()
-                self.redraw()
+        self.mapper = vtk.vtkPolyDataMapper()
+        self.mapper.SetInputConnection(reader.GetOutputPort())
 
+        self.actor.SetMapper(self.mapper)
+
+    def idle(self, obj, event):
+        newmodtime = getmtime(self.filename)
+        now = time.time()
+        if newmodtime + .1 < now and newmodtime != self.modtime:
+            self.reloadModel(newmodtime)
+            self.renWin.Render()
 mw = PocViewer(filename)
-mw.running = True
-mw.onIsoView()
-mw.mainLoop()
+mw.Start()

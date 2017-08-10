@@ -1,8 +1,11 @@
-Fudge = Xform().scale((1+1e-7, 1+1e-7, 1+1e-7))
-
 e1 = Edge().createHelix(.5, 4, 1, 0)
 e2 = Edge().createCircle(center=(1.,0.,0.),normal=(0.,-1.,0.),radius = 0.2)
 f1 = Face().createFace(e2)
+
+e1b = Edge().createHelix(.5, 4, 1, 15, True)
+with Translated((10,0,0)):
+    Pipe(f1, Wire.createWire(e1b))
+
 with Difference():
     Cylinder((0,0,-.5), (0,0,3.5), 1)
     Pipe(f1, e1)

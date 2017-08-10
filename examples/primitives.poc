@@ -1,6 +1,4 @@
 #!/usr/bin/env poc
-import geotools
-
 with Translated((0,0,0)):
     Sphere((0,0,0), 12)
 
@@ -10,7 +8,7 @@ with Translated((-20,0,0)):
 with Translated((20,0,0)), Filleted(1):
     Cylinder((0,0,-5), (0,0,5), 5)
 
-with Translated((0,20,0)), Chamfered(1, lambda e: e.boundingBox().max.z < 0):
+with Translated((0,20,0)), Chamfered(2, lambda e: Bbox(e)[2] < 0):
     Cone((0,0,-5), (0,0,5), 5, 2)
 
 with Translated((0,-20,0)):

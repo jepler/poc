@@ -1,9 +1,8 @@
 # This example isn't useful, except that it increases code coverage
-import geotools
 with Union():
     with Rotated(1, (0,0,1)):
         Sphere((0,0,0), 6)
-    with Filleted(2), Transformed(geotools.Transform()):
+    with Filleted(.5), Transformed(Matrix()), Chamfered(2):
             Box((-5,-5,-5), (5,5,5))
     print(Bbox())
     print(CenterOfMass())
@@ -12,3 +11,31 @@ with Union():
     print(len(list(Wires())))
 
 Text(8, .25, 'Hello_world')
+
+import poctools
+poctools._dir(poctools._dir((1,2,3)))
+poctools._vec(poctools._vec((1,2,3)))
+poctools._pt(poctools._pt((1,2,3)))
+poctools.Matrix(
+    (1,0,0),
+    (0,1,0),
+    (0,0,1))
+poctools.Matrix(
+    (1,0,0,0),
+    (0,1,0,0),
+    (0,0,1,0))
+poctools.Matrix(
+    1,0,0,0,
+    0,1,0,0,
+    0,0,1,0)
+poctools.Matrix(
+    1,0,0,
+    0,1,0,
+    0,0,1)
+poctools._dump(Object())
+try:
+    poctools.do_op(None)
+except ValueError:
+    pass
+else:
+    1/0

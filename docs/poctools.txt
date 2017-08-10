@@ -3,8 +3,8 @@ poctools module
 
 .. automodule:: poctools
 
-Primitives
-~~~~~~~~~~
+Solid Primitives
+~~~~~~~~~~~~~~~~
 Each primitive is added to the currently active group operation.
 At the outermost level, the active group operation is union().
 
@@ -12,12 +12,27 @@ At the outermost level, the active group operation is union().
 .. autofunction:: Cylinder
 .. autofunction:: Cone
 .. autofunction:: Sphere
-.. autofunction:: Text
 .. autofunction:: Torus
 .. autofunction:: Extrude
 .. autofunction:: Loft
 .. autofunction:: Pipe
 .. autofunction:: Revolve
+
+Other primitives
+~~~~~~~~~~~~~~~~
+These classes have classmethods to construct objects of the given
+type.  They may be useful in constructing solid primitives;
+for example, `poctools.Loft` needs a sequence of `Edge` objects.
+
+This syntax is for compatibility with `occmodel`.  A future improvement
+to `poc` should change them so that e.g., `Loft` becomes a group operation,
+and `Edge` becomes a solid primitive that implicitly adds itself to the
+surrounding `Loft`.
+
+.. autoclass:: Edge
+.. autoclass:: Face
+.. autoclass:: Wire
+.. autoclass:: Vertex
 
 Postfix operations
 ~~~~~~~~~~~~~~~~~~

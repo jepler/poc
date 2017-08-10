@@ -18,8 +18,34 @@
 #
 import os
 import sys
+import mock
 sys.path.insert(0, os.path.abspath('..'))
-sys.modules['occmodel'] = object()
+for s in '''
+OCC
+OCC.BRepAlgo
+OCC.BRepAlgoAPI
+OCC.BRepBuilderAPI
+OCC.BRepBndLib
+OCC.BRepFilletAPI
+OCC.BRepGProp
+OCC.BRepLib
+OCC.BRepOffsetAPI
+OCC.BRepPrimAPI
+OCC.BRepTools
+OCC.Bnd
+OCC.GC
+OCC.GCE2d
+OCC.Geom
+OCC.Geom2d
+OCC.gp
+OCC.GProp
+OCC.StlAPI
+OCC.TopAbs
+OCC.TopExp
+OCC.TopTools
+OCC.TopoDS
+'''.split():
+    sys.modules[s] = mock.Mock()
 
 # -- General configuration ------------------------------------------------
 

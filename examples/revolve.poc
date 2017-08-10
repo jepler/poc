@@ -1,4 +1,4 @@
 e = Edge().createEllipse(center=(0.,0.,0.),normal=(0.,0.,1.), rMajor = .5, rMinor=.2)
 f = Face().createFace(e)
-Revolve(f, (1.,0.,0.), (1.,1.,0.), pi/2.)
+Revolve(f, (1.,0.,0.), (1.,1.,0.), 90)
 
