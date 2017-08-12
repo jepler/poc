@@ -1,0 +1,78 @@
+#!/usr/bin/python2
+#   -*- coding: utf-8 -*-
+#   auto-updating viewer of 'poc' modeling program
+#   Copyright © 2017 Jeff Epler <jepler@gmail.com>
+#
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+from occmodelviewer import Viewer
+import os
+import poctools
+import sys
+import time
+import traceback
+import vtk
+
+filename = sys.argv[1]
+
+ns = poctools.execpoc(sys.argv[1:],
+    __output__= os.path.splitext(filename)[0] + ".stl")
+
+b = poctools.Bbox(poctools.Object())
+diag = ((b[3] - b[0]) ** 2 + (b[4] - b[1]) ** 2 + (b[5] - b[2]) ** 2) ** .5
+center = ((b[0] + b[3]) / 2, (b[4] + b[1]) / 2, (b[5]+ b[2]) / 2)
+
+actor = vtk.vtkActor()
+ren = vtk.vtkRenderer()
+ren.AddActor(actor)
+ren.SetBackground(0,0,.5)
+ren.SetBackground2(.1,.1,.2)
+ren.SetGradientBackground(True)
+
+camera = vtk.vtkCamera()
+camera.SetFocalPoint(center)
+camera.SetViewUp((0,0,1))
+camera.ParallelProjectionOff()
+camera.Azimuth(-37.5)
+camera.Elevation(30)
+camera.SetPosition(1.4*diag, diag, diag)
+
+ren.SetActiveCamera(camera)
+ren.ResetCamera()
+
+renWin = vtk.vtkRenderWindow()
+renWin.OffScreenRenderingOn()
+renWin.AddRenderer(ren)
+
+reader = vtk.vtkSTLReader()
+reader.SetFileName(ns['__output__'])
+
+mapper = vtk.vtkPolyDataMapper()
+mapper.SetInputConnection(reader.GetOutputPort())
+actor.SetMapper(mapper)
+
+writer = vtk.vtkPNGWriter()
+
+renWin.Render()
+ 
+w2if = vtk.vtkWindowToImageFilter()
+w2if.SetInput(renWin)
+w2if.ReadFrontBufferOff()
+w2if.SetMagnification(3)
+w2if.Update()
+
+writer = vtk.vtkPNGWriter()
+writer.SetFileName(os.path.splitext(ns['__output__'])[0] + ".png")
+writer.SetInputConnection(w2if.GetOutputPort())
+writer.Write()
