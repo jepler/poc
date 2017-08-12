@@ -23,8 +23,6 @@ there are likely to be compatibility-breaking changes as it develops.
 
 For installation and setup instructions, see README.md.
 
-Contents:
-
 .. toctree::
     :maxdepth: 2
 

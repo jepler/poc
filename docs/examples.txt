@@ -4,9 +4,12 @@ Examples
 Selective fillet
 ----------------
 
-.. include:: ../examples/selective_fillet.poc
-    :code: python
+.. literalinclude:: ../examples/selective_fillet.poc
+    :language: python
+    :linenos:
 
 .. image:: ../images/selective_fillet.png
+    :alt: The result of rendering selective_fillet.poc.  All edges entirely above the centerline of the object are filleted.
+    :width: 75%
 
 For more, see the 'examples' directory in the source distribution.
