@@ -30,9 +30,16 @@ and `Edge` becomes a solid primitive that implicitly adds itself to the
 surrounding `Loft`.
 
 .. autoclass:: Edge
+    :members:
+    :undoc-members:
 .. autoclass:: Face
+    :members:
+    :undoc-members:
 .. autoclass:: Wire
-.. autoclass:: Vertex
+    :members:
+    :undoc-members:
+.. autofunction:: Vertex
+.. autofunction:: Matrix
 
 Postfix operations
 ~~~~~~~~~~~~~~~~~~

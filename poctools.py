@@ -321,9 +321,7 @@ def Translated(delta):
     return Op(Translate, delta)
 
 def Transformed(mat):
-    """Perform a transformation.
-
-Note that `geotools.Transform` is imported as `Xform` within poc files."""
+    """Perform a transformation."""
     return Op(Transform, mat)
 
 def Filleted(radius, edges=None):
@@ -357,6 +355,13 @@ def Translate(delta):
     _transform(obj, t)
 
 def Matrix(*args):
+    """Construct a 4x3 matrix from arguments, which may be
+
+- A list of 12 values
+- A list of 9 values (in which case the last column is taken to be zeros)
+- A list of 3 4-tuples, each taken as a row
+- A list of 3 3-tuples, each taken as a row (the last column taken to be zeros)
+"""
     result = OCC.gp.gp_Trsf()
     if len(args) == 0:
         return result
