@@ -22,8 +22,10 @@ import itertools
 import math
 import os
 import six
+import shutil
 import struct
 import sys
+import tempfile
 import traceback
 
 import OCC.BRepAlgo
@@ -191,6 +193,14 @@ def withhelper(newop, newobj=None, finalop=None):
         obj = holdobj
         op = holdop
         do_op(newobj)
+
+@contextlib.contextmanager
+def TemporaryDirectory(*args):
+    d = tempfile.mkdtemp(*args)
+    try:
+        yield d
+    finally:
+        shutil.rmtree(d)
 
 ### Primitives
 

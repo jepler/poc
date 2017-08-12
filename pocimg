@@ -26,14 +26,25 @@ import vtk
 
 filename = sys.argv[1]
 
-ns = poctools.execpoc(sys.argv[1:],
-    __output__= os.path.splitext(filename)[0] + ".stl")
+with poctools.TemporaryDirectory() as d:
+    stlfile = os.path.join(d, "out.stl")
+    ns = poctools.execpoc(sys.argv[1:])
+    poctools.output(stlfile)
+
+    reader = vtk.vtkSTLReader()
+    reader.SetFileName(stlfile)
+
+    mapper = vtk.vtkPolyDataMapper()
+    mapper.SetInputConnection(reader.GetOutputPort())
+
+    actor = vtk.vtkActor()
+    actor.SetMapper(mapper)
+    actor.GetBounds() # forces STL file to be read now
 
 b = poctools.Bbox(poctools.Object())
 diag = ((b[3] - b[0]) ** 2 + (b[4] - b[1]) ** 2 + (b[5] - b[2]) ** 2) ** .5
 center = ((b[0] + b[3]) / 2, (b[4] + b[1]) / 2, (b[5]+ b[2]) / 2)
 
-actor = vtk.vtkActor()
 ren = vtk.vtkRenderer()
 ren.AddActor(actor)
 ren.SetBackground(0,0,.5)
@@ -55,12 +66,6 @@ renWin = vtk.vtkRenderWindow()
 renWin.OffScreenRenderingOn()
 renWin.AddRenderer(ren)
 
-reader = vtk.vtkSTLReader()
-reader.SetFileName(ns['__output__'])
-
-mapper = vtk.vtkPolyDataMapper()
-mapper.SetInputConnection(reader.GetOutputPort())
-actor.SetMapper(mapper)
 
 writer = vtk.vtkPNGWriter()
 
@@ -73,6 +78,6 @@ w2if.SetMagnification(3)
 w2if.Update()
 
 writer = vtk.vtkPNGWriter()
-writer.SetFileName(os.path.splitext(ns['__output__'])[0] + ".png")
+writer.SetFileName(os.path.splitext(filename)[0] + ".png")
 writer.SetInputConnection(w2if.GetOutputPort())
 writer.Write()
