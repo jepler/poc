@@ -457,7 +457,7 @@ def Object():
     return obj
 
 def CenterOfMass():
-    """Return the bounding box of the current item"""
+    """Return the center of mass box of the current item"""
     prop = OCC.GProp.GProp_GProps()
     OCC.BRepGProp.brepgprop_VolumeProperties(obj, prop)
     return prop.CentreOfMass()
