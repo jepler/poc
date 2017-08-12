@@ -16,3 +16,15 @@ Execute *input.poc* and show the result onscreen.  When *input.poc* is
 modified, **pocview** updates the preview.
 
 
+Program: pocimg
+----------------
+
+Usage: **pocimg** *input.poc* *optional-args...*
+
+Execute *input.poc* and render an image of it to *input.png.  On
+Linux, needs an X server; you can use `xvfb` for this purpose if you
+need to run in a headless fashion::
+
+    xvfb-run -s "-screen 0 640x480x24" pocimg ...
+
+
