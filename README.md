@@ -29,7 +29,7 @@ frequently used in *OpenSCAD*.
 
 # Dependencies
 
-* [OpenCASCADE Community Edition (OCE)](https://github.com/tpaviot/oce/pulls)
+* [OpenCASCADE Community Edition (OCE)](https://github.com/tpaviot/oce)
 * pythonocc-core
 * python-vtk6
 
